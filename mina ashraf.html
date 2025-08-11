@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="مينا أشرف - مطور .NET محترف متخصص في تطوير تطبيقات الويب والبرمجيات">
+    <title>مينا أشرف | مطور .NET محترف</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c5f8b;
+            --secondary-color: #4a8bc1;
+            --accent-color: #f7b731;
+            --light-color: #f5f7fa;
+            --dark-color: #1e272e;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --text-color: #333;
+            --text-light: #666;
+            --border-radius: 8px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Tajawal', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+            direction: rtl;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        p { margin-bottom: 1rem; }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+        a:hover { color: var(--secondary-color); }
+
+        img { max-width: 100%; height: auto; }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+        }
+        .btn-accent:hover { background-color: #f5cd6d; }
+
+        .section { padding: 4rem 0; }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-size: 2rem;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 1rem auto 0;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo span { color: var(--accent-color); }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li { margin-right: 1.5rem; }
+        .nav-links a { font-weight: 500; }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 8rem 0 5rem;
+            text-align: center;
+            margin-top: 70px; /* Offset for fixed header */
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* About Section */
+        .about { background-color: var(--light-color); }
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: right;
+        }
+        .about-content ul {
+            margin-right: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Skills Section */
+        .skills-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            text-align: center;
+            border: 1px solid #eee;
+        }
+
+        .service-card:hover { transform: translateY(-10px); }
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Projects Section */
+        .projects { background-color: var(--light-color); }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover { transform: translateY(-5px); }
+        .project-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        .project-card .tech {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: auto; /* Pushes tech to bottom */
+            padding-top: 1rem;
+        }
+
+        /* Contact Section */
+        .contact { background-color: white; }
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(44, 95, 139, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Form Validation & Status Styles */
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .error-input {
+            border-color: var(--error-color) !important;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+        }
+        
+        .status-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 25px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: white;
+            animation: fadeInDown 0.5s ease-out;
+        }
+        
+        .status-message.success { background-color: var(--success-color); }
+        .status-message.error { background-color: var(--error-color); }
+        
+        .status-message i { font-size: 24px; }
+        
+        .status-message.fade-out { animation: fadeOutUp 0.5s ease-in forwards; }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translate(-50%, -20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        @keyframes fadeOutUp {
+            from { opacity: 1; transform: translate(-50%, 0); }
+            to { opacity: 0; transform: translate(-50%, -20px); }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { color: rgba(255, 255, 255, 0.7); }
+        .footer-links a:hover { color: white; }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .contact-info a { color: rgba(255, 255, 255, 0.7); }
+        .contact-info a:hover { color: white; }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+        }
+        .social-links a:hover { color: var(--accent-color); }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero { margin-top: 0; }
+        }
+
+        @media (max-width: 768px) {
+            body { line-height: 1.5; }
+            .header-container { padding: 1rem; }
+            .hero { padding: 6rem 0 4rem; }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%; /* Position below header */
+                right: 0;
+                background-color: white;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active { display: flex; }
+            .nav-links li { margin: 0.75rem 0; margin-right: 0; }
+            .mobile-menu-btn { display: block; }
+            
+            .section { padding: 3rem 0; }
+            .section-title { font-size: 1.8rem; }
+            .about-content, .container { padding: 0 1.5rem; }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 1rem; }
+            .btn { padding: 0.7rem 1.2rem; font-size: 0.9rem; }
+            .skills-services-grid, .projects-grid, .footer-content { grid-template-columns: 1fr; }
+            .social-links { justify-content: center; }
+            .footer-content { text-align: center; }
+            .contact-info p { justify-content: center; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">مينا<span>أشرف</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">عنّي</a></li>
+                <li><a href="#skills">المهارات</a></li>
+                <li><a href="#projects">المشاريع</a></li>
+                <li><a href="#contact">اتصل بي</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="hero">
+            <div class="container">
+                <h1>مينا أشرف - مطور .NET محترف</h1>
+                <p>مطور شغوف ومدقق للتفاصيل متخصص في تطوير تطبيقات الويب باستخدام ASP.NET Core و Angular</p>
+                <a href="#contact" class="btn btn-accent">تواصل معي</a>
+            </div>
+        </section>
+<section class="section about" id="about">
+    <div class="container">
+        <h2 class="section-title">عنّي</h2>
+        <div class="about-content">
+            <p>مطور .NET شغوف وأهتم بأدق التفاصيل، أمتلك أساسًا متينًا في C# و ASP.NET Core ومبادئ العمارة النظيفة (Clean Architecture) اكتسبته من خلال تدريب مكثف في معهد تكنولوجيا المعلومات (ITI) ودراسة ذاتية متواصلة. أتطلع إلى الانضمام لبيئة عمل ديناميكية أساهم فيها بمشاريع مؤثرة وأواصل تطوير مهاراتي التقنية والمهنية.</p>
+            
+            <h3 style="margin-top: 2rem;">التعليم</h3>
+            <p><strong>بكالوريوس علوم الحاسب</strong> | أكاديمية الشروق | 2019 - 2023</p>
+            <p><strong>مشروع التخرج:</strong> حصل مشروع "ECHO" على تقدير "ممتاز"، وهو نظام قائم على الذكاء الاصطناعي يمكّن المستخدم من التحكم في الحاسوب عن بعد عبر الأوامر الصوتية أو إيماءات اليد، وقد صُمم لمساعدة ذوي الاحتياجات الخاصة وتوفير تجربة استخدام أكثر سهولة.</p>
+            
+            <h3 style="margin-top: 2rem;">التدريب الاحترافي</h3>
+            <p><strong>مطور ويب متكامل (NET. & Angular)</strong> | معهد تكنولوجيا المعلومات (ITI) | مارس 2024 - يوليو 2024</p>
+            <ul>
+                <li>تطوير تطبيقات ويب كاملة (Full-Stack) باستخدام Angular و ASP.NET Core مع MVC و Razor Pages.</li>
+                <li>بناء واجهات برمجة التطبيقات (RESTful APIs).</li>
+                <li>التعامل مع قواعد البيانات باستخدام Entity Framework و SQL Server.</li>
+                <li>تطبيق أنظمة المصادقة والتحقق من الصلاحيات (Authentication & Authorization).</li>
+                <li>تنفيذ مبادئ العمارة النظيفة (Clean Architecture) وأفضل الممارسات البرمجية.</li>
+                <li>المشاركة الفعالة ضمن فريق عمل يتبع منهجية أجايل (Agile) وعقد اجتماعات يومية (Daily Stand-ups).</li>
+            </ul>
+        </div>
+    </div>
+</section>
+        <!-- <section class="section about" id="about">
+            <div class="container">
+                <h2 class="section-title">عنّي</h2>
+                <div class="about-content">
+                    <p>أنا مطور .NET شغوف ومدقق للتفاصيل، أمتلك أساسًا قويًا في C# و ASP.NET Core والعمارة النظيفة من خلال التدريب المكثف في معهد تكنولوجيا المعلومات (ITI) والدراسة الذاتية المتفانية. أسعى للانضمام إلى شركة سريعة النمو حيث يمكنني المساهمة في مشاريع مؤثرة وتطوير مهاراتي التقنية والمهنية باستمرار.</p>
+                    <h3 style="margin-top: 2rem;">التعليم</h3>
+                    <p><strong>بكالوريوس في علوم الحاسوب</strong> | أكاديمية الشروق | 2019 - 2023 </p>
+                    <p>مشروع التخرج: نظام ECHO (تطبيق قائم على الذكاء الاصطناعي) | تقدير: ممتاز</p>
+                    <h3 style="margin-top: 2rem;">التدريب</h3>
+                    <p><strong>ITI | مطور ويب كامل (NET. & Angular)</strong> | مارس 2025 - يوليو 2025</p>
+                    <ul>
+                        <li>تطوير تطبيقات ويب كاملة باستخدام Angular و ASP.NET Core مع MVC وصفحات Razor</li>
+                        <li>إنشاء واستهلاك واجهات برمجة تطبيقات RESTful</li>
+                        <li>معالجة البيانات باستخدام Entity Framework و SQL Server</li>
+                        <li>تنفيذ المصادقة والوصول القائم على الأدوار</li>
+                        <li>تطبيق أفضل الممارسات في العمارة النظيفة</li>
+                        <li>المشاركة في العمل الجماعي  والاجتماعات اليومية</li>
+                    </ul>
+                </div>
+            </div>
+        </section> -->
+
+        <section class="section skills" id="skills">
+            <div class="container">
+                <h2 class="section-title">المهارات التقنية</h2>
+                <div class="skills-services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-server"></i></div>
+                        <h3>تطوير Backend</h3>
+                        <p>ASP.NET Core, MVC, RESTful APIs, Entity Framework, LINQ, Fluent Validation, Localization, Unit Testing</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-database"></i></div>
+                        <h3>قواعد البيانات</h3>
+                        <p>SQL, SQL Server (إتقان قوي)</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-code"></i></div>
+                        <h3>تطوير Frontend</h3>
+                        <p>JavaScript, TypeScript, Angular, HTML5, CSS3, Bootstrap, jQuery, Ajax, Razor Pages</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-cogs"></i></div>
+                        <h3>أدوات ومفاهيم</h3>
+                        <p>Git/GitHub, Postman, Visual Studio 2022, xUnit, OOP, Design Patterns, Clean Code, SOLID principles, Clean Architecture</p>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 4rem;">المهارات الشخصية</h2>
+                <div class="skills-services-grid">
+                    <div class="service-card">
+                        <h3>الملكية والمسؤولية</h3>
+                        <p>إظهار ملكية ومسؤولية قوية في تقديم عمل عالي الجودة وإنجاز المهام</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>العمل الجماعي</h3>
+                        <p>لاعب فريق فعال مع مهارات تعاون وعلاقات شخصية ممتازة</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>التعلم السريع</h3>
+                        <p>التكيف بسرعة مع الأدوات والتقنيات والتحديات الجديدة</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>حل المشكلات</h3>
+                        <p>مدقق للتفاصيل مع قدرات تحليلية قوية وحل المشكلات</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section projects" id="projects">
+            <div class="container">
+                <h2 class="section-title">المشاريع</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>نظام إدارة المطاعم (تطبيق ويب كامل)</h3>
+                        <p>منصة لإدارة المطاعم تتيح تصفح القوائم ومعالجة الطلبات (تناول في المطعم، طلب خارجي، توصيل) وتحليلات المبيعات في الوقت الحقيقي مع قواعد عمل قوية ومكونات واجهة مستخدم.</p>
+                        <p class="tech"><strong>التقنيات:</strong> ASP.NET Core MVC, C#, SQL Server, Entity Framework Core, AutoMapper, Razor Views, Tag Helpers, Middleware, HTML5, CSS3</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>التجارة الإلكترونية (تطبيق سطح مكتب)</h3>
+                        <p>تطبيق سطح مكتب للتجارة الإلكترونية مع عمارة نظيفة وقابلة للصيانة وتجربة تسوق كاملة لكل من المستخدمين والمسؤولين. مصمم باستخدام Onion Architecture لضمان قابلية التوسع والاختبار وفصل الاهتمامات.</p>
+                        <p class="tech"><strong>التقنيات:</strong> .NET 8, .NET Framework, Windows Forms, Entity Framework Core, LINQ, SQL Server, Mapster, Autofac, xUnit, Clean Architecture</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>EasyBuy (تطبيق ويب للتجارة الإلكترونية)</h3>
+                        <p>تطبيق ويب أصلي للتجارة الإلكترونية مع تطبيق أفضل ممارسات التصميم المتجاوب وأساسيات JavaScript لتحسين تجربة المستخدم، بما في ذلك تخزين محلي وانتقال سلس.</p>
+                        <p class="tech"><strong>التقنيات:</strong> HTML5, CSS3, JavaScript, Local Storage API, JSON</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+<section class="section contact" id="contact">
+    <div class="container">
+        <h2 class="section-title">تواصل معي</h2>
+        <div class="form-container">
+            <form id="contactForm" action="https://formspree.io/f/xzzvjqvz" method="POST" novalidate>
+                <div class="form-group">
+                    <label for="name">الاسم الكامل</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="مينا اشرف" required>
+                    <span id="name-error" class="error-message">هذا الحقل مطلوب</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="minaashrafmoawad@gmail.com" required>
+                    <span id="email-error" class="error-message">الرجاء إدخال بريد إلكتروني صحيح</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف (اختياري)</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="+201234567890">
+                </div>
+                <div class="form-group">
+                    <label for="subject">الموضوع</label>
+                    <select id="subject" name="_subject" class="form-control" required>
+                        <option value="" disabled selected>الرجاء اختيار الموضوع...</option>
+                        <option value="عرض توظيف">عرض توظيف</option>
+                        <option value="طلب خدمة">طلب خدمة</option>
+                        <option value="استفسار عام">استفسار عام</option>
+                    </select>
+                    <span id="subject-error" class="error-message">الرجاء اختيار الموضوع</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">الرسالة</label>
+                    <textarea id="message" name="message" class="form-control" placeholder="أهلاً مينا، أنا مهتم ب..." required></textarea>
+                    <span id="message-error" class="error-message">هذا الحقل مطلوب</span>
+                </div>
+                <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6Ldlgp0rAAAAAClnqZqdbtBA_BrWhxMvdaZ1Q1KO"></div>
+                </div>
+                <button class="btn btn-accent" type="submit" style="width: 100%;">إرسال الرسالة</button>
+            </form>
+        </div>
+    </div>
+</section>
+        <!-- <section class="section contact" id="contact">
+    <div class="container">
+        <h2 class="section-title">تواصل معي</h2>
+        <div class="form-container">
+            <form id="contactForm" action="https://formspree.io/f/xzzvjqvz" method="POST" novalidate>
+                <div class="form-group">
+                    <label for="name">الاسم الكامل</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="مينا اشرف" required>
+                    <span id="name-error" class="error-message">هذا الحقل مطلوب</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="minaashrafmoawad@gmail.com" required>
+                    <span id="email-error" class="error-message">الرجاء إدخال بريد إلكتروني صحيح</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">الموضوع</label>
+                    <select id="subject" name="_subject" class="form-control" required>
+                        <option value="" disabled selected>الرجاء اختيار الموضوع...</option>
+                        <option value="عرض توظيف">عرض توظيف</option>
+                        <option value="طلب خدمة">طلب خدمة</option>
+                        <option value="استفسار عام">استفسار عام</option>
+                    </select>
+                    <span id="subject-error" class="error-message">الرجاء اختيار الموضوع</span>
+                </div>
+                <div class="form-group">
+                    <label for="message">الرسالة</label>
+                    <textarea id="message" name="message" class="form-control" placeholder="أهلاً مينا، أنا مهتم ب..." required></textarea>
+                    <span id="message-error" class="error-message">هذا الحقل مطلوب</span>
+                </div>
+                <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6Ldlgp0rAAAAAClnqZqdbtBA_BrWhxMvdaZ1Q1KO"></div>
+                </div>
+                <button class="btn btn-accent" type="submit" style="width: 100%;">إرسال الرسالة</button>
+            </form>
+        </div>
+    </div>
+</section> -->
+<!-- <section class="section contact" id="contact">
+    <div class="container">
+        <h2 class="section-title">تواصل معي</h2>
+        <div class="form-container">
+            <form id="contactForm" action="https://formspree.io/f/xzzvjqvz" method="POST" novalidate>
+                <div class="form-group">
+                    <label for="name">الاسم الكامل</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="مينا اشرف" required>
+                    <span id="name-error" class="error-message">هذا الحقل مطلوب</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="minaashrafmoawad@gmail.com" required>
+                    <span id="email-error" class="error-message">الرجاء إدخال بريد إلكتروني صحيح</span>
+                </div>
+                <div class="form-group">
+                    <label for="subject">الموضوع</label>
+                    <input type="text" id="subject" name="_subject" class="form-control" placeholder="بخصوص..." required>
+                    <span id="subject-error" class="error-message">هذا الحقل مطلوب</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="reason">سبب الرسالة</label>
+                    <select id="reason" name="reason" class="form-control" required>
+                        <option value="" disabled selected>الرجاء الاختيار...</option>
+                        <option value="عرض توظيف">عرض توظيف</option>
+                        <option value="طلب خدمة">طلب خدمة</option>
+                        <option value="استفسار عام">استفسار عام</option>
+                    </select>
+                    <span id="reason-error" class="error-message">الرجاء اختيار سبب الرسالة</span>
+                </div>
+                <div class="form-group">
+                    <label for="message">الرسالة</label>
+                    <textarea id="message" name="message" class="form-control" placeholder="أهلاً مينا، أنا مهتم ب..." required></textarea>
+                    <span id="message-error" class="error-message">هذا الحقل مطلوب</span>
+                </div>
+                <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6Ldlgp0rAAAAAClnqZqdbtBA_BrWhxMvdaZ1Q1KO"></div>
+                </div>
+                <button class="btn btn-accent" type="submit" style="width: 100%;">إرسال الرسالة</button>
+            </form>
+        </div>
+    </div>
+</section> -->
+        <!-- <section class="section contact" id="contact">
+            <div class="container">
+                <h2 class="section-title">تواصل معي</h2>
+                <div class="form-container">
+                    <form id="contactForm" action="https://formspree.io/f/xzzvjqvz" method="POST" novalidate>
+                        <div class="form-group">
+                            <label for="name">الاسم الكامل</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="مينا اشرف" required>
+                            <span id="name-error" class="error-message">هذا الحقل مطلوب</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="minaashrafmoawad@gmail.com" required>
+                            <span id="email-error" class="error-message">الرجاء إدخال بريد إلكتروني صحيح</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">الموضوع</label>
+                            <input type="text" id="subject" name="_subject" class="form-control" placeholder="عرض عمل أو استفسار" required>
+                            <span id="subject-error" class="error-message">هذا الحقل مطلوب</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">الرسالة</label>
+                            <textarea id="message" name="message" class="form-control" placeholder="أهلاً مينا، أنا مهتم ب..." required></textarea>
+                            <span id="message-error" class="error-message">هذا الحقل مطلوب</span>
+                        </div>
+                        <div class="form-group">
+                             <div class="g-recaptcha" data-sitekey="6Ldlgp0rAAAAAClnqZqdbtBA_BrWhxMvdaZ1Q1KO"></div>
+                        </div>
+                        <button class="btn btn-accent" type="submit" style="width: 100%;">إرسال الرسالة</button>
+                    </form>
+                </div>
+            </div>
+        </section> -->
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>مينا أشرف</h3>
+                    <p>مطور .NET محترف متخصص في تطوير تطبيقات الويب والبرمجيات باستخدام أحدث التقنيات وأفضل الممارسات.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#hero">الرئيسية</a></li>
+                        <li><a href="#about">عنّي</a></li>
+                        <li><a href="#skills">المهارات</a></li>
+                        <li><a href="#projects">المشاريع</a></li>
+                        <li><a href="#contact">اتصل بي</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>معلومات التواصل</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> سوهاج - مصر</p>
+                        <p><i class="fas fa-phone"></i><a href="https://wa.me/201278576490" target="_blank">+201278576490</a></p>
+                        <p><i class="fas fa-envelope"></i><a href="mailto:minaashrafmoawad@gmail.com">minaashrafmoawad@gmail.com</a></p>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/mina-ashraf-moawad/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/minaashrafmoawad/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://wa.me/201278576490" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 م/مينا اشرف. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // --- Mobile Menu Toggle ---
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            const navLinksItems = document.querySelectorAll('.nav-links a');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+                mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+                mobileMenuBtn.querySelector('i').classList.toggle('fa-bars');
+                mobileMenuBtn.querySelector('i').classList.toggle('fa-times');
+            });
+
+            // Close mobile menu when a link is clicked
+            navLinksItems.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                        mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                    }
+                });
+            });
+
+            // --- Smooth Scrolling for Anchor Links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        e.preventDefault();
+                        const headerOffset = document.querySelector('header').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // --- Contact Form Logic ---
+           const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                // UPDATED: The fields array now reflects the new form structure
+                const formFields = [
+                    { id: 'name', errorId: 'name-error', defaultError: 'هذا الحقل مطلوب' },
+                    { id: 'email', errorId: 'email-error', defaultError: 'الرجاء إدخال بريد إلكتروني صحيح' },
+                    { id: 'subject', errorId: 'subject-error', defaultError: 'الرجاء اختيار الموضوع' },
+                    { id: 'message', errorId: 'message-error', defaultError: 'هذا الحقل مطلوب' }
+                ];
+
+                const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase());
+
+                const showFieldError = (input, errorElement, message) => {
+                    input.classList.add('error-input');
+                    errorElement.textContent = message;
+                    errorElement.style.display = 'block';
+                };
+
+                const clearFieldError = (input, errorElement) => {
+                    input.classList.remove('error-input');
+                    errorElement.style.display = 'none';
+                };
+
+                const validateField = (field) => {
+                    const input = document.getElementById(field.id);
+                    const errorElement = document.getElementById(field.errorId);
+                    let isValid = true;
+                    
+                    if (!input.value.trim()) {
+                        showFieldError(input, errorElement, 'هذا الحقل مطلوب');
+                        isValid = false;
+                    } else if (input.type === 'email' && !validateEmail(input.value)) {
+                        showFieldError(input, errorElement, field.defaultError);
+                        isValid = false;
+                    } else {
+                        clearFieldError(input, errorElement);
+                    }
+                    return isValid;
+                };
+
+                formFields.forEach(field => {
+                    const input = document.getElementById(field.id);
+                    input.addEventListener('blur', () => validateField(field));
+                    input.addEventListener('input', () => validateField(field));
+                });
+
+                contactForm.addEventListener('submit', async function (event) {
+                    event.preventDefault();
+
+                    let isFormValid = true;
+                    formFields.forEach(field => {
+                        if (!validateField(field)) {
+                            isFormValid = false;
+                        }
+                    });
+
+                    const recaptchaResponse = (typeof grecaptcha !== 'undefined') ? grecaptcha.getResponse() : null;
+                    if (!recaptchaResponse) {
+                        showStatusMessage('الرجاء إكمال التحقق من أنك لست روبوت', 'error');
+                        isFormValid = false;
+                    }
+
+                    if (!isFormValid) {
+                        const firstError = document.querySelector('.error-input');
+                        if (firstError) {
+                            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        return;
+                    }
+
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalBtnText = submitBtn.innerHTML;
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+
+                    try {
+                        const response = await fetch(this.action, {
+                            method: 'POST',
+                            body: new FormData(this),
+                            headers: { 'Accept': 'application/json' }
+                        });
+
+                        if (response.ok) {
+                            showStatusMessage('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً.', 'success');
+                            this.reset();
+                            if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
+                            formFields.forEach(field => clearFieldError(document.getElementById(field.id), document.getElementById(field.errorId)));
+                        } else {
+                            throw new Error('فشل إرسال النموذج. حاول مرة أخرى.');
+                        }
+                    } catch (error) {
+                        showStatusMessage(error.message || 'حدث خطأ. يرجى المحاولة مرة أخرى لاحقاً.', 'error');
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalBtnText;
+                    }
+                });
+            }
+
+            function showStatusMessage(message, type = 'success') {
+                const iconClass = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+                const statusDiv = document.createElement('div');
+                statusDiv.className = `status-message ${type}`;
+                statusDiv.innerHTML = `<i class="fas ${iconClass}"></i><p>${message}</p>`;
+
+                document.body.appendChild(statusDiv);
+
+                setTimeout(() => {
+                    statusDiv.classList.add('fade-out');
+                    statusDiv.addEventListener('animationend', () => statusDiv.remove());
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+
+</html>
